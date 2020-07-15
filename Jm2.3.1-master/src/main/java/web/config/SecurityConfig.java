@@ -33,8 +33,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.authorizeRequests()
                 .antMatchers("/","/logout").permitAll()
-                .antMatchers("/user").access("hasAnyRole('ROLE_USER')")
-                .antMatchers("/admin").access("hasAnyRole('ROLE_ADMIN')")
+                .antMatchers("/user").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
+                .antMatchers("/admin").access("hasRole('ROLE_ADMIN')")
                 .and().formLogin()  // Spring сам подставит свою логин форму
                 .successHandler(loginSuccessHandler)
                 .and().logout().logoutUrl("/logout").logoutSuccessUrl("/").permitAll();
